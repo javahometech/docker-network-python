@@ -5,7 +5,8 @@ FROM nginx:latest
 RUN apt-get update && apt-get install -y python3 python3-pip
 
 # Install MySQL connector for Python
-RUN pip3 install mysql-connector-python
+# Use --break-system-packages to allow pip installation in externally-managed environment
+RUN pip3 install mysql-connector-python --break-system-packages
 
 # Copy the Python script to the container
 COPY app.py /app.py

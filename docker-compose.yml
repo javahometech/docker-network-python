@@ -1,14 +1,35 @@
-name: 'java home application'
+name: 'java-home-application'
 
 services:
   python:
     image: python:0.1
-    build: "."
     container_name: myapp
-    dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+    build: 
+      context: "."
+      dockerfile: ./Dockerfile 
     environment:
       - "MYSQL_HOST=mysql"
       - "MYSQL_PORT=3306"
       - "MYSQL_USER=appuser"
       - "MYSQL_PASSWORD=javahomecloud"
       - "MYSQL_DATABASE=mydb"
+    networks:
+      - jhc
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - "MYSQL_ROOT_PASSWORD=javahomecloud"
+      - "MYSQL_DATABASE=mydb"
+      - "MYSQL_USER=appuser"
+      - "MYSQL_PASSWORD=javahomecloud"
+    networks:
+      - jhc
+
+networks:
+  jhc:
+    driver: bridge

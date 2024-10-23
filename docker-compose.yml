@@ -1,0 +1,14 @@
+name: 'java home application'
+
+services:
+  python:
+    image: python:0.1
+    build: "."
+    container_name: myapp
+    dockerfile: ./Dockerfile
+    environment:
+      - "MYSQL_HOST=mysql"
+      - "MYSQL_PORT=3306"
+      - "MYSQL_USER=appuser"
+      - "MYSQL_PASSWORD=javahomecloud"
+      - "MYSQL_DATABASE=mydb"

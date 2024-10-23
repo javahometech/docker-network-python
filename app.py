@@ -9,12 +9,13 @@ def connect_to_database():
         port = os.getenv('MYSQL_PORT')
         password = os.getenv('MYSQL_PASSWORD')
         database = os.getenv('MYSQL_DATABASE')
+        username = os.getenv('MYSQL_USER')
 
         # Establish connection to MySQL
         connection = mysql.connector.connect(
             host=host,
             port=port,
-            user='root',
+            user=username,
             password=password,
             database=database
         )
